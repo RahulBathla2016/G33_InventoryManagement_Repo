@@ -1,0 +1,144 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Invoices | Inventory Management System{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">Invoices</h1>
+        <a href="{% url 'invoice_create' %}" class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>Create New Invoice
+        </a>
+    </div>
+
+    <div class="card">
+        <div class="card-header bg-white">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="card-title mb-0">All Invoices</h5>
+                </div>
+                <div class="col-md-6">
+                    <form method="get" class="d-flex">
+                        <input type="text" name="q" class="form-control me-2" placeholder="Search invoices..." value="{{ request.GET.q }}">
+                        <button type="submit" class="btn btn-outline-primary">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            {% if invoices %}
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Invoice #</th>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Due Date</th>
+                                <th>Total Amount</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for invoice in invoices %}
+                                <tr>
+                                    <td>{{ invoice.invoice_number }}</td>
+                                    <td>{{ invoice.customer_name }}</td>
+                                    <td>{{ invoice.invoice_date }}</td>
+                                    <td>{{ invoice.due_date }}</td>
+                                    <td>${{ invoice.total_amount }}</td>
+                                    <td>
+                                        {% if invoice.status == 'PAID' %}
+                                            <span class="badge bg-success">Paid</span>
+                                        {% elif invoice.status == 'PENDING' %}
+                                            <span class="badge bg-warning">Pending</span>
+                                        {% else %}
+                                            <span class="badge bg-danger">Cancelled</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="{% url 'invoice_detail' invoice.id %}" class="btn btn-info">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{% url 'invoice_edit' invoice.id %}" class="btn btn-primary">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="{% url 'invoice_print' invoice.id %}" class="btn btn-secondary" target="_blank">
+                                                <i class="fas fa-print"></i>
+                                            </a>
+                                            <a href="{% url 'invoice_delete' invoice.id %}" class="btn btn-danger" 
+                                               onclick="return confirm('Are you sure you want to delete this invoice?')">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="text-center py-4">
+                    <i class="fas fa-file-invoice fa-4x mb-3 text-muted"></i>
+                    <p class="lead">No invoices found</p>
+                    {% if request.GET.q %}
+                        <p>No results match your search criteria. <a href="{% url 'invoice_list' %}">Clear search</a></p>
+                    {% else %}
+                        <p>Get started by creating your first invoice.</p>
+                        <a href="{% url 'invoice_create' %}" class="btn btn-primary">
+                            <i class="fas fa-plus me-2"></i>Create Invoice
+                        </a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+        {% if invoices.has_other_pages %}
+            <div class="card-footer bg-white">
+                <nav>
+                    <ul class="pagination justify-content-center mb-0">
+                        {% if invoices.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ invoices.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                                    Previous
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link">Previous</span>
+                            </li>
+                        {% endif %}
+
+                        {% for i in invoices.paginator.page_range %}
+                            {% if invoices.number == i %}
+                                <li class="page-item active">
+                                    <span class="page-link">{{ i }}</span>
+                                </li>
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ i }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                                        {{ i }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if invoices.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ invoices.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                                    Next
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link">Next</span>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,327 @@
+2025-05-07 15:44:18,797 - accounts.api_client - INFO - Making GET request to http://localhost:5000/api/dashboard-data
+2025-05-07 15:44:18,798 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6Im5ld3Rlc3R1c2VyMSIsImlzX3N0YWZmIjpmYWxzZSwiaXNfc3VwZXJ1c2VyIjpmYWxzZSwiZXhwIjoxNzQ2Njk5MjU4LCJpYXQiOjE3NDY2MTI4NTh9.WaBHg9A7nLE-_trrJUHZeg80HXxUAphdTdsfDuVzhN4'}
+2025-05-07 15:44:20,910 - accounts.api_client - INFO - Response status: 400
+2025-05-07 15:44:20,910 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.5', 'Date': 'Wed, 07 May 2025 10:14:20 GMT', 'Content-Type': 'application/json', 'Content-Length': '134', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 15:44:20,910 - accounts.api_client - INFO - Response content: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+...
+2025-05-07 15:44:20,911 - accounts.api_client - ERROR - API Error: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+
+2025-05-07 15:44:50,931 - accounts.api_client - INFO - Making GET request to http://localhost:5000/api/dashboard-data
+2025-05-07 15:44:50,931 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6Im5ld3Rlc3R1c2VyMSIsImlzX3N0YWZmIjpmYWxzZSwiaXNfc3VwZXJ1c2VyIjpmYWxzZSwiZXhwIjoxNzQ2Njk5MjkwLCJpYXQiOjE3NDY2MTI4OTB9.o0oDdfum0ZBOUCYUGHdgeayz0iTV57vEfP7XpMhPpuY'}
+2025-05-07 15:44:53,010 - accounts.api_client - INFO - Response status: 400
+2025-05-07 15:44:53,010 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.5', 'Date': 'Wed, 07 May 2025 10:14:53 GMT', 'Content-Type': 'application/json', 'Content-Length': '134', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 15:44:53,010 - accounts.api_client - INFO - Response content: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+...
+2025-05-07 15:44:53,010 - accounts.api_client - ERROR - API Error: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+
+2025-05-07 15:44:53,946 - accounts.api_client - INFO - Making GET request to http://localhost:5000/api/categories
+2025-05-07 15:44:53,947 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6Im5ld3Rlc3R1c2VyMSIsImlzX3N0YWZmIjpmYWxzZSwiaXNfc3VwZXJ1c2VyIjpmYWxzZSwiZXhwIjoxNzQ2Njk5MjkzLCJpYXQiOjE3NDY2MTI4OTN9.sZzmYif4LLWcoHO_IjjjlnNR_J6cu4mYhraIgLsuzKw'}
+2025-05-07 15:44:56,022 - accounts.api_client - INFO - Response status: 400
+2025-05-07 15:44:56,022 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.5', 'Date': 'Wed, 07 May 2025 10:14:56 GMT', 'Content-Type': 'application/json', 'Content-Length': '134', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 15:44:56,022 - accounts.api_client - INFO - Response content: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+...
+2025-05-07 15:44:56,022 - accounts.api_client - ERROR - API Error: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+
+2025-05-07 15:45:06,951 - accounts.api_client - INFO - Making POST request to http://localhost:5000/api/categories
+2025-05-07 15:45:06,951 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6Im5ld3Rlc3R1c2VyMSIsImlzX3N0YWZmIjpmYWxzZSwiaXNfc3VwZXJ1c2VyIjpmYWxzZSwiZXhwIjoxNzQ2Njk5MzA2LCJpYXQiOjE3NDY2MTI5MDZ9.5-R-GVVdOUNe2FRDo4MukQpDTUZVJRzGoKxq2eGlzBE'}
+2025-05-07 15:45:06,952 - accounts.api_client - INFO - Request data: {'name': 'doll', 'description': 'nnj'}
+2025-05-07 15:45:09,020 - accounts.api_client - INFO - Response status: 201
+2025-05-07 15:45:09,020 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.5', 'Date': 'Wed, 07 May 2025 10:15:09 GMT', 'Content-Type': 'application/json', 'Content-Length': '154', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 15:45:09,020 - accounts.api_client - INFO - Response content: {
+  "created_at": "Wed, 07 May 2025 15:45:08 GMT",
+  "description": "nnj",
+  "id": 6,
+  "name": "doll",
+  "updated_at": "Wed, 07 May 2025 15:45:08 GMT"
+}
+...
+2025-05-07 15:45:09,027 - accounts.api_client - INFO - Making GET request to http://localhost:5000/api/categories
+2025-05-07 15:45:09,027 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6Im5ld3Rlc3R1c2VyMSIsImlzX3N0YWZmIjpmYWxzZSwiaXNfc3VwZXJ1c2VyIjpmYWxzZSwiZXhwIjoxNzQ2Njk5MzA5LCJpYXQiOjE3NDY2MTI5MDl9.ooQtSptn1lf7QaDM2vDtjPzeBjMgExLOjK8Jvf2XDr4'}
+2025-05-07 15:45:11,067 - accounts.api_client - INFO - Response status: 400
+2025-05-07 15:45:11,067 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.5', 'Date': 'Wed, 07 May 2025 10:15:11 GMT', 'Content-Type': 'application/json', 'Content-Length': '134', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 15:45:11,067 - accounts.api_client - INFO - Response content: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+...
+2025-05-07 15:45:11,067 - accounts.api_client - ERROR - API Error: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+
+2025-05-07 15:48:13,477 - accounts.api_client - INFO - Making POST request to http://localhost:5000/api/categories
+2025-05-07 15:48:13,477 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6Im5ld3Rlc3R1c2VyMSIsImlzX3N0YWZmIjpmYWxzZSwiaXNfc3VwZXJ1c2VyIjpmYWxzZSwiZXhwIjoxNzQ2Njk5NDkzLCJpYXQiOjE3NDY2MTMwOTN9.7wWSFckbffBoTupGLFtQm1Jbpb2oAXmi14ep47DILIw'}
+2025-05-07 15:48:13,477 - accounts.api_client - INFO - Request data: {'name': 'bottles', 'description': 'sx'}
+2025-05-07 15:48:15,528 - accounts.api_client - INFO - Response status: 400
+2025-05-07 15:48:15,528 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.5', 'Date': 'Wed, 07 May 2025 10:18:15 GMT', 'Content-Type': 'application/json', 'Content-Length': '56', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 15:48:15,528 - accounts.api_client - INFO - Response content: {
+  "error": "Category with this name already exists"
+}
+...
+2025-05-07 15:48:15,528 - accounts.api_client - ERROR - API Error: {
+  "error": "Category with this name already exists"
+}
+
+2025-05-07 16:24:02,429 - accounts.api_client - INFO - Making POST request to http://localhost:5000/api/categories
+2025-05-07 16:24:02,430 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6Im5ld3Rlc3R1c2VyMSIsImlzX3N0YWZmIjpmYWxzZSwiaXNfc3VwZXJ1c2VyIjpmYWxzZSwiZXhwIjoxNzQ2NzAxNjQyLCJpYXQiOjE3NDY2MTUyNDJ9.mTNkj_EhjZCJrLv1khAXvkZvhHAdLRzESyq1HPq49KM'}
+2025-05-07 16:24:02,431 - accounts.api_client - INFO - Request data: {'name': 'bottles', 'description': 'sx'}
+2025-05-07 16:24:04,476 - accounts.api_client - INFO - Response status: 400
+2025-05-07 16:24:04,477 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.5', 'Date': 'Wed, 07 May 2025 10:54:04 GMT', 'Content-Type': 'application/json', 'Content-Length': '56', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 16:24:04,478 - accounts.api_client - INFO - Response content: {
+  "error": "Category with this name already exists"
+}
+...
+2025-05-07 16:24:04,478 - accounts.api_client - ERROR - API Error: {
+  "error": "Category with this name already exists"
+}
+
+2025-05-07 16:25:45,616 - accounts.api_client - INFO - Making GET request to http://localhost:5000/api/products
+2025-05-07 16:25:45,616 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6Im5ld3Rlc3R1c2VyMSIsImlzX3N0YWZmIjpmYWxzZSwiaXNfc3VwZXJ1c2VyIjpmYWxzZSwiZXhwIjoxNzQ2NzAxNzQ1LCJpYXQiOjE3NDY2MTUzNDV9.l52KdbOXYL5wJcvWEHiRBkAs12D7A3sb9nAZR8OGjvE'}
+2025-05-07 16:25:47,679 - accounts.api_client - INFO - Response status: 400
+2025-05-07 16:25:47,680 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.5', 'Date': 'Wed, 07 May 2025 10:55:47 GMT', 'Content-Type': 'application/json', 'Content-Length': '134', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 16:25:47,680 - accounts.api_client - INFO - Response content: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+...
+2025-05-07 16:25:47,680 - accounts.api_client - ERROR - API Error: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+
+2025-05-07 16:25:50,372 - accounts.api_client - INFO - Making GET request to http://localhost:5000/api/dashboard-data
+2025-05-07 16:25:50,373 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6Im5ld3Rlc3R1c2VyMSIsImlzX3N0YWZmIjpmYWxzZSwiaXNfc3VwZXJ1c2VyIjpmYWxzZSwiZXhwIjoxNzQ2NzAxNzUwLCJpYXQiOjE3NDY2MTUzNTB9.mp0Lyn4ZujucdXYMp7Qze6FGILWKGfsmpmcLlL9djqg'}
+2025-05-07 16:25:52,422 - accounts.api_client - INFO - Response status: 400
+2025-05-07 16:25:52,422 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.5', 'Date': 'Wed, 07 May 2025 10:55:52 GMT', 'Content-Type': 'application/json', 'Content-Length': '134', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 16:25:52,423 - accounts.api_client - INFO - Response content: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+...
+2025-05-07 16:25:52,423 - accounts.api_client - ERROR - API Error: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+
+2025-05-07 16:29:51,238 - accounts.api_client - INFO - Making POST request to http://localhost:5000/api/auth/token
+2025-05-07 16:29:51,238 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json'}
+2025-05-07 16:29:51,238 - accounts.api_client - INFO - Request data: {'username': 'newtestuser1', 'password': 'securepassword1'}
+2025-05-07 16:29:53,562 - accounts.api_client - INFO - Response status: 200
+2025-05-07 16:29:53,563 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.5', 'Date': 'Wed, 07 May 2025 10:59:53 GMT', 'Content-Type': 'application/json', 'Content-Length': '395', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 16:29:53,563 - accounts.api_client - INFO - Response content: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6Im5ld3Rlc3R1c2VyMSIsImlzX3N0YWZmIjpmYWxzZSwiaXNfc3VwZXJ1c2VyIjpmYWxzZSwiZXhwIjoxNzQ2NzAxOTkzLCJpYXQiOjE3NDY2MTU1OTN9.ZZiyZloGlzxE6yIZYhIehAVLon11ED26EGdf3kAf-hE",
+  "user": {
+    "email": "newtest1@example.com",
+    "id": 1,
+    "is_staff": false,
+    "is_superuser": false,
+    "username": "newtestuser1"
+  }
+}
+...
+2025-05-07 16:29:53,610 - accounts.api_client - INFO - Making GET request to http://localhost:5000/api/dashboard-data
+2025-05-07 16:29:53,611 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6Im5ld3Rlc3R1c2VyMSIsImlzX3N0YWZmIjpmYWxzZSwiaXNfc3VwZXJ1c2VyIjpmYWxzZSwiZXhwIjoxNzQ2NzAxOTkzLCJpYXQiOjE3NDY2MTU1OTN9.JSyiAWQr7X3JoXhqT02a-KoBQWY2Ft8cJxdpm4OTTgY'}
+2025-05-07 16:29:55,752 - accounts.api_client - INFO - Response status: 400
+2025-05-07 16:29:55,752 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.5', 'Date': 'Wed, 07 May 2025 10:59:55 GMT', 'Content-Type': 'application/json', 'Content-Length': '134', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 16:29:55,752 - accounts.api_client - INFO - Response content: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+...
+2025-05-07 16:29:55,752 - accounts.api_client - ERROR - API Error: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+
+2025-05-07 17:02:29,948 - accounts.api_client - INFO - Making POST request to http://localhost:5000/api/auth/token
+2025-05-07 17:02:29,950 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json'}
+2025-05-07 17:02:29,951 - accounts.api_client - INFO - Request data: {'username': 'newtestuser1', 'password': 'securepassword1'}
+2025-05-07 17:02:32,183 - accounts.api_client - INFO - Response status: 500
+2025-05-07 17:02:32,183 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.7', 'Date': 'Wed, 07 May 2025 11:32:32 GMT', 'Content-Type': 'application/json', 'Content-Length': '85', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 17:02:32,183 - accounts.api_client - INFO - Response content: {
+  "error": "Server error",
+  "message": "module 'jwt' has no attribute 'encode'"
+}
+...
+2025-05-07 17:02:32,185 - accounts.api_client - ERROR - API Error: {
+  "error": "Server error",
+  "message": "module 'jwt' has no attribute 'encode'"
+}
+
+2025-05-07 17:02:47,049 - accounts.api_client - INFO - Making POST request to http://localhost:5000/api/auth/token
+2025-05-07 17:02:47,049 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json'}
+2025-05-07 17:02:47,053 - accounts.api_client - INFO - Request data: {'username': 'newtestuser1', 'password': 'securepassword1'}
+2025-05-07 17:02:49,272 - accounts.api_client - INFO - Response status: 500
+2025-05-07 17:02:49,272 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.7', 'Date': 'Wed, 07 May 2025 11:32:49 GMT', 'Content-Type': 'application/json', 'Content-Length': '85', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 17:02:49,272 - accounts.api_client - INFO - Response content: {
+  "error": "Server error",
+  "message": "module 'jwt' has no attribute 'encode'"
+}
+...
+2025-05-07 17:02:49,272 - accounts.api_client - ERROR - API Error: {
+  "error": "Server error",
+  "message": "module 'jwt' has no attribute 'encode'"
+}
+
+2025-05-07 17:03:35,306 - accounts.api_client - INFO - Making POST request to http://localhost:5000/api/auth/token
+2025-05-07 17:03:35,307 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json'}
+2025-05-07 17:03:35,307 - accounts.api_client - INFO - Request data: {'username': 'newtestuser1', 'password': 'securepassword1'}
+2025-05-07 17:03:37,504 - accounts.api_client - INFO - Response status: 500
+2025-05-07 17:03:37,505 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.7', 'Date': 'Wed, 07 May 2025 11:33:37 GMT', 'Content-Type': 'application/json', 'Content-Length': '85', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 17:03:37,505 - accounts.api_client - INFO - Response content: {
+  "error": "Server error",
+  "message": "module 'jwt' has no attribute 'encode'"
+}
+...
+2025-05-07 17:03:37,507 - accounts.api_client - ERROR - API Error: {
+  "error": "Server error",
+  "message": "module 'jwt' has no attribute 'encode'"
+}
+
+2025-05-07 17:04:22,219 - accounts.api_client - INFO - Making POST request to http://localhost:5000/api/users/register
+2025-05-07 17:04:22,219 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json'}
+2025-05-07 17:04:22,219 - accounts.api_client - INFO - Request data: {'username': 'mukul', 'email': 'mukul@gmail.com', 'password': 'mukul@12345'}
+2025-05-07 17:04:24,443 - accounts.api_client - INFO - Response status: 500
+2025-05-07 17:04:24,444 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.7', 'Date': 'Wed, 07 May 2025 11:34:24 GMT', 'Content-Type': 'application/json', 'Content-Length': '85', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 17:04:24,444 - accounts.api_client - INFO - Response content: {
+  "error": "Server error",
+  "message": "module 'jwt' has no attribute 'encode'"
+}
+...
+2025-05-07 17:04:24,444 - accounts.api_client - ERROR - API Error: {
+  "error": "Server error",
+  "message": "module 'jwt' has no attribute 'encode'"
+}
+
+2025-05-07 17:15:11,361 - accounts.api_client - INFO - Making POST request to http://localhost:5000/api/auth/token
+2025-05-07 17:15:11,361 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json'}
+2025-05-07 17:15:11,362 - accounts.api_client - INFO - Request data: {'username': 'mukul', 'password': 'mukul@3123'}
+2025-05-07 17:15:13,557 - accounts.api_client - INFO - Response status: 401
+2025-05-07 17:15:13,559 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.7', 'Date': 'Wed, 07 May 2025 11:45:13 GMT', 'Content-Type': 'application/json', 'Content-Length': '37', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 17:15:13,559 - accounts.api_client - INFO - Response content: {
+  "error": "Invalid credentials"
+}
+...
+2025-05-07 17:15:13,559 - accounts.api_client - ERROR - API Error: {
+  "error": "Invalid credentials"
+}
+
+2025-05-07 17:15:35,180 - accounts.api_client - INFO - Making POST request to http://localhost:5000/api/auth/token
+2025-05-07 17:15:35,180 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json'}
+2025-05-07 17:15:35,181 - accounts.api_client - INFO - Request data: {'username': 'mukul', 'password': 'mukul@12345'}
+2025-05-07 17:15:37,372 - accounts.api_client - INFO - Response status: 500
+2025-05-07 17:15:37,372 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.7', 'Date': 'Wed, 07 May 2025 11:45:37 GMT', 'Content-Type': 'application/json', 'Content-Length': '85', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 17:15:37,373 - accounts.api_client - INFO - Response content: {
+  "error": "Server error",
+  "message": "module 'jwt' has no attribute 'encode'"
+}
+...
+2025-05-07 17:15:37,373 - accounts.api_client - ERROR - API Error: {
+  "error": "Server error",
+  "message": "module 'jwt' has no attribute 'encode'"
+}
+
+2025-05-07 17:16:51,210 - accounts.api_client - INFO - Making POST request to http://localhost:5000/api/users/register
+2025-05-07 17:16:51,210 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json'}
+2025-05-07 17:16:51,212 - accounts.api_client - INFO - Request data: {'username': 'devkaransinghbumrah', 'email': 'dev12@gmail.com', 'password': 'dev@rahul123'}
+2025-05-07 17:16:53,430 - accounts.api_client - INFO - Response status: 500
+2025-05-07 17:16:53,430 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.7', 'Date': 'Wed, 07 May 2025 11:46:53 GMT', 'Content-Type': 'application/json', 'Content-Length': '85', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 17:16:53,430 - accounts.api_client - INFO - Response content: {
+  "error": "Server error",
+  "message": "module 'jwt' has no attribute 'encode'"
+}
+...
+2025-05-07 17:16:53,431 - accounts.api_client - ERROR - API Error: {
+  "error": "Server error",
+  "message": "module 'jwt' has no attribute 'encode'"
+}
+
+2025-05-07 17:20:12,195 - accounts.api_client - INFO - Making POST request to http://localhost:5000/api/auth/token
+2025-05-07 17:20:12,196 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json'}
+2025-05-07 17:20:12,196 - accounts.api_client - INFO - Request data: {'username': 'pranjal', 'password': 'dev@rahul@123'}
+2025-05-07 17:20:14,345 - accounts.api_client - INFO - Response status: 401
+2025-05-07 17:20:14,345 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.7', 'Date': 'Wed, 07 May 2025 11:50:14 GMT', 'Content-Type': 'application/json', 'Content-Length': '37', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 17:20:14,345 - accounts.api_client - INFO - Response content: {
+  "error": "Invalid credentials"
+}
+...
+2025-05-07 17:20:14,345 - accounts.api_client - ERROR - API Error: {
+  "error": "Invalid credentials"
+}
+
+2025-05-07 17:34:15,164 - accounts.api_client - INFO - Making POST request to http://localhost:5000/api/auth/token
+2025-05-07 17:34:15,165 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json'}
+2025-05-07 17:34:15,165 - accounts.api_client - INFO - Request data: {'username': 'pranjal', 'password': 'dev@rahul123'}
+2025-05-07 17:34:17,428 - accounts.api_client - INFO - Response status: 200
+2025-05-07 17:34:17,429 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.7', 'Date': 'Wed, 07 May 2025 12:04:17 GMT', 'Content-Type': 'application/json', 'Content-Length': '383', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 17:34:17,429 - accounts.api_client - INFO - Response content: {
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0LCJ1c2VybmFtZSI6InByYW5qYWwiLCJpc19zdGFmZiI6ZmFsc2UsImlzX3N1cGVydXNlciI6ZmFsc2UsImV4cCI6MTc0NjcwNTg1NywiaWF0IjoxNzQ2NjE5NDU3fQ.JX3fDtReuDWVYKFGS_9H-9BJY-0N49Zxt_Bo5s0sbFQ",
+  "user": {
+    "email": "pranjal12@gmail.com",
+    "id": 4,
+    "is_staff": false,
+    "is_superuser": false,
+    "username": "pranjal"
+  }
+}
+...
+2025-05-07 17:34:30,964 - accounts.api_client - INFO - Making GET request to http://localhost:5000/api/stock-transactions
+2025-05-07 17:34:30,965 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json'}
+2025-05-07 17:34:31,695 - accounts.api_client - INFO - Making GET request to http://localhost:5000/api/invoices
+2025-05-07 17:34:31,696 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json'}
+2025-05-07 17:34:33,015 - accounts.api_client - INFO - Response status: 400
+2025-05-07 17:34:33,016 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.7', 'Date': 'Wed, 07 May 2025 12:04:33 GMT', 'Content-Type': 'application/json', 'Content-Length': '134', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 17:34:33,016 - accounts.api_client - INFO - Response content: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+...
+2025-05-07 17:34:33,017 - accounts.api_client - ERROR - API Error: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+
+2025-05-07 17:34:33,744 - accounts.api_client - INFO - Response status: 400
+2025-05-07 17:34:33,745 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.7', 'Date': 'Wed, 07 May 2025 12:04:33 GMT', 'Content-Type': 'application/json', 'Content-Length': '134', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 17:34:33,745 - accounts.api_client - INFO - Response content: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+...
+2025-05-07 17:34:33,746 - accounts.api_client - ERROR - API Error: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+
+2025-05-07 17:34:35,255 - accounts.api_client - INFO - Making GET request to http://localhost:5000/api/invoices
+2025-05-07 17:34:35,256 - accounts.api_client - INFO - Headers: {'Content-Type': 'application/json'}
+2025-05-07 17:34:37,307 - accounts.api_client - INFO - Response status: 400
+2025-05-07 17:34:37,307 - accounts.api_client - INFO - Response headers: {'Server': 'Werkzeug/3.1.3 Python/3.12.7', 'Date': 'Wed, 07 May 2025 12:04:37 GMT', 'Content-Type': 'application/json', 'Content-Length': '134', 'Access-Control-Allow-Origin': '*', 'Connection': 'close'}
+2025-05-07 17:34:37,307 - accounts.api_client - INFO - Response content: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+...
+2025-05-07 17:34:37,307 - accounts.api_client - ERROR - API Error: {
+  "error": "Bad request",
+  "message": "400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)"
+}
+

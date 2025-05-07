@@ -1,0 +1,83 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}{{ product.name }} - Inventory Management System{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Product Details</h2>
+        <div>
+            <a href="{% url 'product_update' product.id %}" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Edit
+            </a>
+            <a href="{% url 'product_list' %}" class="btn btn-outline-secondary ms-2">
+                <i class="fas fa-arrow-left"></i> Back to Products
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded" style="max-height: 300px;">
+                    {% else %}
+                        <div class="bg-light d-flex align-items-center justify-content-center" style="height: 300px;">
+                            <i class="fas fa-image fa-4x text-muted"></i>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-white">
+                    <h4 class="mb-0">{{ product.name }}</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <p class="mb-1 text-muted">Category</p>
+                            <p class="mb-3 fs-5">{{ product.category.name }}</p>
+                            
+                            <p class="mb-1 text-muted">Price</p>
+                            <p class="mb-3 fs-5">${{ product.price }}</p>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <p class="mb-1 text-muted">Quantity</p>
+                            <p class="mb-3 fs-5">{{ product.quantity }}</p>
+                            
+                            <p class="mb-1 text-muted">Status</p>
+                            <p class="mb-3">
+                                {% if product.is_in_stock %}
+                                    <span class="badge bg-success">In Stock</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Out of Stock</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <p class="mb-1 text-muted">Description</p>
+                        <p>{{ product.description|linebreaks }}</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-1 text-muted">Created On</p>
+                            <p>{{ product.created_at|date:"F j, Y, g:i a" }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-1 text-muted">Last Updated</p>
+                            <p>{{ product.updated_at|date:"F j, Y, g:i a" }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

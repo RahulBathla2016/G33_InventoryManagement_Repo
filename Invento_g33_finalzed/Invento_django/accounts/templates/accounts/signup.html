@@ -1,0 +1,85 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Sign Up - Stockaly{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-image">
+        <div>
+            <h2 class="display-6">"With Stockaly, you can actually organize your business."</h2>
+            <div class="warehouse-image mt-4">
+                <img src="https://via.placeholder.com/600x400" alt="Warehouse" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+    <div class="auth-form">
+        <div class="form-card">
+            <div class="brand-logo">
+                <h1>📦</h1>
+            </div>
+            <h2 class="mb-4 text-center">Let's get started</h2>
+            
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            
+            <form method="post" action="{% url 'signup' %}">
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    <input type="text" name="company_name" class="form-control" placeholder="Company Name" required>
+                </div>
+                
+                <div class="mb-3">
+                    <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+                </div>
+                
+                <div class="mb-3">
+                    <input type="text" name="username" class="form-control" placeholder="Username" required>
+                </div>
+                
+                <div class="mb-3">
+                    <input type="password" name="password1" class="form-control" placeholder="Password" required>
+                </div>
+                
+                <div class="mb-3">
+                    <input type="password" name="password2" class="form-control" placeholder="Confirm Password" required>
+                </div>
+                
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="termsCheckbox" required>
+                    <label class="form-check-label" for="termsCheckbox">
+                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary d-flex align-items-center justify-content-center">
+                    Create your account
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right ms-2" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                    </svg>
+                </button>
+            </form>
+            
+            <div class="text-center mt-3">
+                <p>or login using</p>
+                <div class="social-login">
+                    <a href="#" class="social-btn">G</a>
+                    <a href="#" class="social-btn">f</a>
+                    <a href="#" class="social-btn">in</a>
+                    <a href="#" class="social-btn">X</a>
+                    <a href="#" class="social-btn">MS</a>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <p>Already have a Stockaly account? <a href="{% url 'login' %}">Log in</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

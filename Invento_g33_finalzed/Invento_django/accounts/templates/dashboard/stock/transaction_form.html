@@ -1,0 +1,119 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}New Stock Transaction - Inventory Management System{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">New Stock Transaction</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.product.id_for_label }}" class="form-label">Product</label>
+                            {{ form.product }}
+                            {% if form.product.errors %}
+                            <div class="text-danger">
+                                {{ form.product.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.transaction_type.id_for_label }}" class="form-label">Transaction Type</label>
+                            {{ form.transaction_type }}
+                            {% if form.transaction_type.errors %}
+                            <div class="text-danger">
+                                {{ form.transaction_type.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.quantity.id_for_label }}" class="form-label">Quantity</label>
+                            {{ form.quantity }}
+                            {% if form.quantity.errors %}
+                            <div class="text-danger">
+                                {{ form.quantity.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.notes.id_for_label }}" class="form-label">Notes</label>
+                            {{ form.notes }}
+                            {% if form.notes.errors %}
+                            <div class="text-danger">
+                                {{ form.notes.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'stock_transaction_list' %}" class="btn btn-outline-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Create Transaction</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get the product select element
+        const productSelect = document.getElementById('{{ form.product.id_for_label }}');
+        const quantityInput = document.getElementById('{{ form.quantity.id_for_label }}');
+        const transactionTypeSelect = document.getElementById('{{ form.transaction_type.id_for_label }}');
+        
+        // Function to check available quantity
+        function checkAvailableQuantity() {
+            if (transactionTypeSelect.value === 'OUT') {
+                const productId = productSelect.value;
+                if (productId) {
+                    fetch(`/get-product-info/?product_id=${productId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                quantityInput.setAttribute('max', data.available);
+                                // Add a helper text
+                                const helper = document.createElement('small');
+                                helper.classList.add('form-text', 'text-muted');
+                                helper.id = 'quantity-helper';
+                                helper.textContent = `Available: ${data.available}`;
+                                
+                                // Remove existing helper if it exists
+                                const existingHelper = document.getElementById('quantity-helper');
+                                if (existingHelper) {
+                                    existingHelper.remove();
+                                }
+                                
+                                quantityInput.parentNode.appendChild(helper);
+                            }
+                        });
+                }
+            } else {
+                // Remove any max attribute and helper text for stock in
+                quantityInput.removeAttribute('max');
+                const existingHelper = document.getElementById('quantity-helper');
+                if (existingHelper) {
+                    existingHelper.remove();
+                }
+            }
+        }
+        
+        // Check on page load
+        checkAvailableQuantity();
+        
+        // Add change event listeners
+        productSelect.addEventListener('change', checkAvailableQuantity);
+        transactionTypeSelect.addEventListener('change', checkAvailableQuantity);
+    });
+</script>
+{% endblock %}

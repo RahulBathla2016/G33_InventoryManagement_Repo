@@ -1,0 +1,342 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Dashboard - Inventory Management System{% endblock %}
+
+{% block extra_head %}
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Dashboard</h2>
+        <div>
+            <a href="{% url 'product_create' %}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add Product
+            </a>
+            <a href="{% url 'stock_transaction_create' %}" class="btn btn-success ms-2">
+                <i class="fas fa-exchange-alt"></i> Stock Transaction
+            </a>
+            <a href="{% url 'invoice_create' %}" class="btn btn-info ms-2 text-white">
+                <i class="fas fa-file-invoice"></i> Create Invoice
+            </a>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <!-- Products Card -->
+        <div class="col-md-3 mb-4">
+            <div class="card dashboard-card products">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title text-muted">Total Products</h5>
+                            <h2 class="mb-0">{{ products_count }}</h2>
+                        </div>
+                        <div class="bg-primary bg-opacity-10 p-3 rounded">
+                            <i class="fas fa-box fa-2x text-primary"></i>
+                        </div>
+                    </div>
+                    <a href="{% url 'product_list' %}" class="btn btn-sm btn-light mt-3">View All</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories Card -->
+        <div class="col-md-3 mb-4">
+            <div class="card dashboard-card categories">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title text-muted">Total Categories</h5>
+                            <h2 class="mb-0">{{ categories_count }}</h2>
+                        </div>
+                        <div class="bg-success bg-opacity-10 p-3 rounded">
+                            <i class="fas fa-tags fa-2x text-success"></i>
+                        </div>
+                    </div>
+                    <a href="{% url 'category_list' %}" class="btn btn-sm btn-light mt-3">View All</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Low Stock Card -->
+        <div class="col-md-3 mb-4">
+            <div class="card dashboard-card low-stock">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title text-muted">Low Stock Items</h5>
+                            <h2 class="mb-0">{{ low_stock_products }}</h2>
+                        </div>
+                        <div class="bg-danger bg-opacity-10 p-3 rounded">
+                            <i class="fas fa-exclamation-triangle fa-2x text-danger"></i>
+                        </div>
+                    </div>
+                    <a href="{% url 'product_list' %}" class="btn btn-sm btn-light mt-3">View All</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Invoices Card -->
+        <div class="col-md-3 mb-4">
+            <div class="card dashboard-card invoices">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title text-muted">Recent Invoices</h5>
+                            <h2 class="mb-0">{{ recent_invoices.count }}</h2>
+                        </div>
+                        <div class="bg-info bg-opacity-10 p-3 rounded">
+                            <i class="fas fa-file-invoice fa-2x text-info"></i>
+                        </div>
+                    </div>
+                    <a href="{% url 'invoice_list' %}" class="btn btn-sm btn-light mt-3">View All</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Inventory Distribution Chart -->
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Inventory Distribution by Category</h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container" style="position: relative; height:320px;">
+                        <canvas id="inventoryPieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stock In/Out Chart -->
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Stock Transactions (Last 7 Days)</h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container" style="position: relative; height:320px;">
+                        <canvas id="stockLineChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Recent Stock Transactions -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Recent Stock Transactions</h5>
+                    <a href="{% url 'stock_transaction_list' %}" class="btn btn-sm btn-outline-primary">View All</a>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Type</th>
+                                    <th>Quantity</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for transaction in recent_transactions %}
+                                <tr>
+                                    <td>{{ transaction.product.name }}</td>
+                                    <td>
+                                        {% if transaction.transaction_type == 'IN' %}
+                                        <span class="badge bg-success">Stock In</span>
+                                        {% else %}
+                                        <span class="badge bg-danger">Stock Out</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ transaction.quantity }}</td>
+                                    <td>{{ transaction.transaction_date|date:"M d, Y" }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center py-3">No recent transactions</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Invoices -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Recent Invoices</h5>
+                    <a href="{% url 'invoice_list' %}" class="btn btn-sm btn-outline-primary">View All</a>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Invoice #</th>
+                                    <th>Customer</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for invoice in recent_invoices %}
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'invoice_detail' invoice.id %}">{{ invoice.invoice_number }}</a>
+                                    </td>
+                                    <td>{{ invoice.customer_name }}</td>
+                                    <td>${{ invoice.total }}</td>
+                                    <td>
+                                        {% if invoice.status == 'PAID' %}
+                                        <span class="badge bg-success">Paid</span>
+                                        {% elif invoice.status == 'UNPAID' %}
+                                        <span class="badge bg-warning text-dark">Unpaid</span>
+                                        {% elif invoice.status == 'DRAFT' %}
+                                        <span class="badge bg-secondary">Draft</span>
+                                        {% elif invoice.status == 'CANCELED' %}
+                                        <span class="badge bg-danger">Canceled</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center py-3">No recent invoices</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inventory Distribution Pie Chart
+        const categoryData = {{ category_data|safe }};
+        const categoryLabels = categoryData.map(item => item.name);
+        const categoryValues = categoryData.map(item => item.total_quantity || 0);
+        
+        const pieCtx = document.getElementById('inventoryPieChart').getContext('2d');
+        const pieChart = new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: categoryLabels,
+                datasets: [{
+                    data: categoryValues,
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                        'rgba(199, 199, 199, 0.7)',
+                        'rgba(83, 102, 255, 0.7)',
+                        'rgba(40, 159, 64, 0.7)',
+                        'rgba(210, 199, 199, 0.7)',
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(199, 199, 199, 1)',
+                        'rgba(83, 102, 255, 1)',
+                        'rgba(40, 159, 64, 1)',
+                        'rgba(210, 199, 199, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.raw || 0;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = Math.round((value / total) * 100);
+                                return `${label}: ${value} (${percentage}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Stock In/Out Line Chart
+        const dates = {{ dates|safe }};
+        const stockIn = {{ stock_in|safe }};
+        const stockOut = {{ stock_out|safe }};
+        
+        const lineCtx = document.getElementById('stockLineChart').getContext('2d');
+        const lineChart = new Chart(lineCtx, {
+            type: 'line',
+            data: {
+                labels: dates,
+                datasets: [
+                    {
+                        label: 'Stock In',
+                        data: stockIn,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        tension: 0.1,
+                        fill: true
+                    },
+                    {
+                        label: 'Stock Out',
+                        data: stockOut,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        tension: 0.1,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Quantity'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

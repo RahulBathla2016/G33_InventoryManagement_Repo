@@ -1,0 +1,196 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Invoice #{{ invoice.invoice_number }} - Inventory Management System{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Invoice #{{ invoice.invoice_number }}</h5>
+                    <div>
+                        <a href="{% url 'invoice_print' invoice.id %}" class="btn btn-outline-primary btn-sm me-2" target="_blank">
+                            <i class="fas fa-print"></i> Print
+                        </a>
+                        <a href="{% url 'invoice_list' %}" class="btn btn-outline-secondary btn-sm">
+                            <i class="fas fa-arrow-left"></i> Back to List
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Status Badge -->
+                    <div class="mb-4 text-end">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                {% if invoice.status == 'DRAFT' %}
+                                <span class="badge bg-warning text-dark">Draft</span>
+                                {% elif invoice.status == 'PAID' %}
+                                <span class="badge bg-success">Paid</span>
+                                {% elif invoice.status == 'UNPAID' %}
+                                <span class="badge bg-danger">Unpaid</span>
+                                {% elif invoice.status == 'CANCELED' %}
+                                <span class="badge bg-secondary">Canceled</span>
+                                {% endif %}
+                            </div>
+                            <div>
+                                {% if invoice.status != 'CANCELED' and invoice.status != 'PAID' %}
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        Actions
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li>
+                                            <a class="dropdown-item" href="{% url 'invoice_edit' invoice.id %}">
+                                                <i class="fas fa-edit me-2"></i> Edit Invoice
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <form method="post" action="{% url 'invoice_status_update' invoice.id %}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="status" value="PAID">
+                                                <button type="submit" class="dropdown-item text-success">
+                                                    <i class="fas fa-check-circle me-2"></i> Mark as Paid
+                                                </button>
+                                            </form>
+                                        </li>
+                                        <li>
+                                            <form method="post" action="{% url 'invoice_status_update' invoice.id %}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="status" value="UNPAID">
+                                                <button type="submit" class="dropdown-item text-danger">
+                                                    <i class="fas fa-times-circle me-2"></i> Mark as Unpaid
+                                                </button>
+                                            </form>
+                                        </li>
+                                        <li>
+                                            <form method="post" action="{% url 'invoice_status_update' invoice.id %}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="status" value="CANCELED">
+                                                <button type="submit" class="dropdown-item text-secondary">
+                                                    <i class="fas fa-ban me-2"></i> Cancel Invoice
+                                                </button>
+                                            </form>
+                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <a class="dropdown-item text-danger" href="{% url 'invoice_delete' invoice.id %}">
+                                                <i class="fas fa-trash me-2"></i> Delete Invoice
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Invoice Header -->
+                    <div class="row mb-4">
+                        <div class="col-sm-6">
+                            <h6 class="text-muted mb-3">Customer Information</h6>
+                            <div class="p-3 bg-light rounded">
+                                <div class="fw-bold">{{ invoice.customer_name }}</div>
+                                {% if invoice.customer_email %}
+                                <div><i class="fas fa-envelope me-2 text-muted"></i>{{ invoice.customer_email }}</div>
+                                {% endif %}
+                                {% if invoice.customer_phone %}
+                                <div><i class="fas fa-phone me-2 text-muted"></i>{{ invoice.customer_phone }}</div>
+                                {% endif %}
+                                {% if invoice.customer_address %}
+                                <div><i class="fas fa-map-marker-alt me-2 text-muted"></i>{{ invoice.customer_address }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <h6 class="text-muted mb-3">Invoice Details</h6>
+                            <div class="p-3 bg-light rounded">
+                                <div class="row mb-2">
+                                    <div class="col-sm-5 text-muted">Invoice Number:</div>
+                                    <div class="col-sm-7 fw-bold">{{ invoice.invoice_number }}</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm-5 text-muted">Issue Date:</div>
+                                    <div class="col-sm-7">{{ invoice.issue_date }}</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm-5 text-muted">Due Date:</div>
+                                    <div class="col-sm-7">{{ invoice.due_date }}</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-sm-5 text-muted">Created By:</div>
+                                    <div class="col-sm-7">{{ invoice.created_by.username }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Invoice Items -->
+                    <h6 class="text-muted mb-3">Invoice Items</h6>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Product</th>
+                                    <th class="text-end">Unit Price</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-end">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in invoice.items.all %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ item.product.name }}</td>
+                                    <td class="text-end">${{ item.unit_price|floatformat:2 }}</td>
+                                    <td class="text-center">{{ item.quantity }}</td>
+                                    <td class="text-end">${{ item.total|floatformat:2 }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="5" class="text-center">No items in this invoice</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4" class="text-end fw-bold">Subtotal:</td>
+                                    <td class="text-end">${{ invoice.subtotal|floatformat:2 }}</td>
+                                </tr>
+                                {% if invoice.tax_rate > 0 %}
+                                <tr>
+                                    <td colspan="4" class="text-end">Tax ({{ invoice.tax_rate }}%):</td>
+                                    <td class="text-end">${{ invoice.tax_amount|floatformat:2 }}</td>
+                                </tr>
+                                {% endif %}
+                                {% if invoice.discount > 0 %}
+                                <tr>
+                                    <td colspan="4" class="text-end">Discount:</td>
+                                    <td class="text-end">-${{ invoice.discount|floatformat:2 }}</td>
+                                </tr>
+                                {% endif %}
+                                <tr class="table-active">
+                                    <td colspan="4" class="text-end fw-bold">Total:</td>
+                                    <td class="text-end fw-bold">${{ invoice.total|floatformat:2 }}</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <!-- Notes -->
+                    {% if invoice.notes %}
+                    <div class="mb-4">
+                        <h6 class="text-muted mb-3">Notes</h6>
+                        <div class="p-3 bg-light rounded">
+                            {{ invoice.notes|linebreaks }}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

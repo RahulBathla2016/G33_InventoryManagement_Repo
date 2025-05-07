@@ -1,0 +1,421 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}{% if invoice %}Edit Invoice{% else %}Create Invoice{% endif %} - Inventory Management System{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">{% if invoice %}Edit Invoice #{{ invoice.invoice_number }}{% else %}Create New Invoice{% endif %}</h5>
+                    <a href="{% url 'invoice_list' %}" class="btn btn-outline-secondary btn-sm">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                </div>
+                <div class="card-body">
+                    <form method="post" id="invoiceForm">
+                        {% csrf_token %}
+                        
+                        <!-- Customer Information -->
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <h6 class="text-muted mb-3">Customer Information</h6>
+                                <div class="mb-3">
+                                    <label for="{{ form.customer_name.id_for_label }}" class="form-label">Customer Name*</label>
+                                    {{ form.customer_name }}
+                                    {% if form.customer_name.errors %}
+                                    <div class="text-danger">{{ form.customer_name.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="{{ form.customer_email.id_for_label }}" class="form-label">Email</label>
+                                    {{ form.customer_email }}
+                                    {% if form.customer_email.errors %}
+                                    <div class="text-danger">{{ form.customer_email.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="{{ form.customer_phone.id_for_label }}" class="form-label">Phone</label>
+                                    {{ form.customer_phone }}
+                                    {% if form.customer_phone.errors %}
+                                    <div class="text-danger">{{ form.customer_phone.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="{{ form.customer_address.id_for_label }}" class="form-label">Address</label>
+                                    {{ form.customer_address }}
+                                    {% if form.customer_address.errors %}
+                                    <div class="text-danger">{{ form.customer_address.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <h6 class="text-muted mb-3">Invoice Details</h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="{{ form.issue_date.id_for_label }}" class="form-label">Issue Date*</label>
+                                            {{ form.issue_date }}
+                                            {% if form.issue_date.errors %}
+                                            <div class="text-danger">{{ form.issue_date.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="{{ form.due_date.id_for_label }}" class="form-label">Due Date*</label>
+                                            {{ form.due_date }}
+                                            {% if form.due_date.errors %}
+                                            <div class="text-danger">{{ form.due_date.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="{{ form.tax_rate.id_for_label }}" class="form-label">Tax Rate (%)</label>
+                                            {{ form.tax_rate }}
+                                            {% if form.tax_rate.errors %}
+                                            <div class="text-danger">{{ form.tax_rate.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="{{ form.discount.id_for_label }}" class="form-label">Discount</label>
+                                            {{ form.discount }}
+                                            {% if form.discount.errors %}
+                                            <div class="text-danger">{{ form.discount.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.status.id_for_label }}" class="form-label">Status</label>
+                                    {{ form.status }}
+                                    {% if form.status.errors %}
+                                    <div class="text-danger">{{ form.status.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.notes.id_for_label }}" class="form-label">Notes</label>
+                                    {{ form.notes }}
+                                    {% if form.notes.errors %}
+                                    <div class="text-danger">{{ form.notes.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Invoice Items -->
+                        <h6 class="text-muted mb-3">Invoice Items</h6>
+                        <div class="table-responsive mb-4">
+                            <table class="table table-bordered" id="invoice-items-table">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Product</th>
+                                        <th width="150">Unit Price</th>
+                                        <th width="150">Quantity</th>
+                                        <th width="150">Total</th>
+                                        <th width="100">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="invoice-items-body">
+                                    {{ formset.management_form }}
+                                    {% for form in formset %}
+                                    <tr class="invoice-item-row">
+                                        <td>
+                                            {{ form.id }}
+                                            <div class="product-select-container">
+                                                {{ form.product }}
+                                                {% if form.product.errors %}
+                                                <div class="text-danger">{{ form.product.errors }}</div>
+                                                {% endif %}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="input-group">
+                                                <span class="input-group-text">$</span>
+                                                {{ form.unit_price }}
+                                                {% if form.unit_price.errors %}
+                                                <div class="text-danger">{{ form.unit_price.errors }}</div>
+                                                {% endif %}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {{ form.quantity }}
+                                            <small class="text-muted available-qty"></small>
+                                            {% if form.quantity.errors %}
+                                            <div class="text-danger">{{ form.quantity.errors }}</div>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <div class="input-group">
+                                                <span class="input-group-text">$</span>
+                                                <input type="text" class="form-control item-total" readonly value="0.00">
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            {% if formset.can_delete %}
+                                            <div class="form-check d-none">
+                                                {{ form.DELETE }}
+                                            </div>
+                                            <button type="button" class="btn btn-outline-danger btn-sm delete-row">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5">
+                                            <button type="button" class="btn btn-outline-primary btn-sm" id="add-item">
+                                                <i class="fas fa-plus"></i> Add Item
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="text-end">Subtotal:</td>
+                                        <td>
+                                            <div class="input-group">
+                                                <span class="input-group-text">$</span>
+                                                <input type="text" class="form-control" id="subtotal" readonly value="0.00">
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="text-end">Tax:</td>
+                                        <td>
+                                            <div class="input-group">
+                                                <span class="input-group-text">$</span>
+                                                <input type="text" class="form-control" id="tax-amount" readonly value="0.00">
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="text-end">Discount:</td>
+                                        <td>
+                                            <div class="input-group">
+                                                <span class="input-group-text">$</span>
+                                                <input type="text" class="form-control" id="discount-display" readonly value="0.00">
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="table-active">
+                                        <td colspan="3" class="text-end fw-bold">Total:</td>
+                                        <td>
+                                            <div class="input-group">
+                                                <span class="input-group-text">$</span>
+                                                <input type="text" class="form-control fw-bold" id="grand-total" readonly value="0.00">
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="text-end">
+                            <a href="{% url 'invoice_list' %}" class="btn btn-secondary me-2">Cancel</a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-1"></i> 
+                                {% if invoice %}Update Invoice{% else %}Create Invoice{% endif %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Empty form template for JS -->
+<div id="empty-form-template" style="display: none;">
+    <table>
+        <tbody>
+            <tr class="invoice-item-row">
+                <td>
+                    <div class="product-select-container">
+                        {{ formset.empty_form.product }}
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        {{ formset.empty_form.unit_price }}
+                    </div>
+                </td>
+                <td>
+                    {{ formset.empty_form.quantity }}
+                    <small class="text-muted available-qty"></small>
+                </td>
+                <td>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control item-total" readonly value="0.00">
+                    </div>
+                </td>
+                <td class="text-center">
+                    {% if formset.can_delete %}
+                    <div class="form-check d-none">
+                        {{ formset.empty_form.DELETE }}
+                    </div>
+                    <button type="button" class="btn btn-outline-danger btn-sm delete-row">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block extrajs %}
+<script>
+    $(document).ready(function() {
+        // Initialize totals
+        updateAllTotals();
+        
+        // Add new item row
+        $('#add-item').click(function() {
+            var formCount = parseInt($('#id_items-TOTAL_FORMS').val());
+            var row = $('#empty-form-template tbody tr').clone();
+            
+            // Update IDs and names
+            row.find(':input').each(function() {
+                if($(this).attr('id')) {
+                    var newId = $(this).attr('id').replace('__prefix__', formCount);
+                    $(this).attr('id', newId);
+                }
+                if($(this).attr('name')) {
+                    var newName = $(this).attr('name').replace('__prefix__', formCount);
+                    $(this).attr('name', newName);
+                }
+            });
+            
+            // Add to table and increment form count
+            $('#invoice-items-body').append(row);
+            $('#id_items-TOTAL_FORMS').val(formCount + 1);
+            
+            // Initialize new row
+            initializeRow(row);
+        });
+        
+        // Initialize existing rows
+        $('.invoice-item-row').each(function() {
+            initializeRow($(this));
+        });
+        
+        // Delete row
+        $(document).on('click', '.delete-row', function() {
+            var row = $(this).closest('tr');
+            if($('.invoice-item-row').length > 1) {
+                row.find('input[id$=DELETE]').prop('checked', true);
+                row.hide();
+            } else {
+                alert('You must have at least one item in the invoice.');
+            }
+            updateAllTotals();
+        });
+        
+        // Tax rate and discount change events
+        $('#id_tax_rate, #id_discount').on('input', function() {
+            updateAllTotals();
+        });
+        
+        // Initialize a single row
+        function initializeRow(row) {
+            // Set up product select2
+            row.find('select[id$=product]').select2({
+                theme: 'bootstrap-5',
+                placeholder: 'Select a product'
+            });
+            
+            // Product change handler
+            row.find('select[id$=product]').change(function() {
+                var productId = $(this).val();
+                if(productId) {
+                    getProductInfo(productId, row);
+                } else {
+                    row.find('input[id$=unit_price]').val('0.00');
+                    row.find('.available-qty').text('');
+                    updateRowTotal(row);
+                }
+            });
+            
+            // Quantity and price change handlers
+            row.find('input[id$=quantity], input[id$=unit_price]').on('input', function() {
+                updateRowTotal(row);
+            });
+            
+            // Trigger change if product is already selected
+            if(row.find('select[id$=product]').val()) {
+                row.find('select[id$=product]').trigger('change');
+            }
+        }
+        
+        // Get product info via AJAX
+        function getProductInfo(productId, row) {
+            $.ajax({
+                url: '{% url "get_product_info" %}',
+                data: {
+                    'product_id': productId
+                },
+                dataType: 'json',
+                success: function(data) {
+                    if(data.success) {
+                        row.find('input[id$=unit_price]').val(data.price.toFixed(2));
+                        row.find('.available-qty').text('Available: ' + data.available);
+                        updateRowTotal(row);
+                    }
+                }
+            });
+        }
+        
+        // Update a single row's total
+        function updateRowTotal(row) {
+            var quantity = parseFloat(row.find('input[id$=quantity]').val()) || 0;
+            var unitPrice = parseFloat(row.find('input[id$=unit_price]').val()) || 0;
+            var total = quantity * unitPrice;
+            
+            row.find('.item-total').val(total.toFixed(2));
+            updateAllTotals();
+        }
+        
+        // Update all totals
+        function updateAllTotals() {
+            var subtotal = 0;
+            
+            // Sum visible rows
+            $('.invoice-item-row:visible').each(function() {
+                subtotal += parseFloat($(this).find('.item-total').val()) || 0;
+            });
+            
+            var taxRate = parseFloat($('#id_tax_rate').val()) || 0;
+            var discount = parseFloat($('#id_discount').val()) || 0;
+            
+            var taxAmount = subtotal * (taxRate / 100);
+            var grandTotal = subtotal + taxAmount - discount;
+            
+            // Update footer values
+            $('#subtotal').val(subtotal.toFixed(2));
+            $('#tax-amount').val(taxAmount.toFixed(2));
+            $('#discount-display').val(discount.toFixed(2));
+            $('#grand-total').val(grandTotal.toFixed(2));
+        }
+    });
+</script>
+{% endblock %}
